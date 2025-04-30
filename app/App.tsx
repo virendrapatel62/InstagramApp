@@ -13,11 +13,12 @@ import ReelIcon from './src/components/icons/Reel.icon';
 import { placeholderProfilePicture } from './src/lib/images';
 import HomeScreen from './src/screens/Home/Home.screen';
 import PlaceholderScreen from './src/screens/Placeholder/Placeholder.screen';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Stack = createNativeStackNavigator();
 const BottomTabNavigator = createBottomTabNavigator();
 
-function BottomTab() {
+function BottomTabScreens() {
   const commonOptions = {
     tabBarShowLabel: false,
     headerShown: false,
@@ -121,9 +122,27 @@ function BottomTab() {
 }
 
 function RootStack() {
+  const commonOptions = {
+    headerShown: false,
+  };
+
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen
+        options={commonOptions}
+        name="Home"
+        component={BottomTabScreens}
+      />
+      <Stack.Screen
+        options={commonOptions}
+        name="Messages"
+        component={() => <PlaceholderScreen name="Messages" />}
+      />
+      <Stack.Screen
+        options={commonOptions}
+        name="Notifications"
+        component={() => <PlaceholderScreen name="Likes & Comments" />}
+      />
     </Stack.Navigator>
   );
 }
@@ -131,7 +150,7 @@ function RootStack() {
 function App() {
   return (
     <NavigationContainer>
-      <BottomTab />
+      <RootStack />
     </NavigationContainer>
   );
 }

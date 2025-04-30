@@ -1,13 +1,8 @@
 import * as React from 'react';
 import Svg, { G, Path } from 'react-native-svg';
+import { IconComponent } from './Icons.types';
 
-interface ReelIconProps {
-  size?: number;
-  color?: string;
-  style?: any;
-}
-
-const ReelIcon = (props: ReelIconProps) => {
+const ReelIcon: IconComponent = props => {
   const size = props.size || 20;
   return (
     <Svg

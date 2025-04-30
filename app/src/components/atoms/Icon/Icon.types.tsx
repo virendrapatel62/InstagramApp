@@ -9,6 +9,7 @@ export interface IIconProps {
   color?: string;
   style?: TextStyle;
   lib?: TIconLibType;
+  onPress?: () => void;
 }
 
 export type IIcon = FunctionComponent<PropsWithChildren<IIconProps>>;

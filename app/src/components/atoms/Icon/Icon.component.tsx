@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+
 import { IIcon, TIconLibType } from './Icon.types';
 
 /**
@@ -11,7 +14,13 @@ import { IIcon, TIconLibType } from './Icon.types';
 
 const Icon: IIcon = props => {
   const { name, size = 24, color = '#000', style, lib } = props;
-  const IconComponents = [FontAwesomeIcon, EntypoIcon, AntDesignIcon];
+  const IconComponents = [
+    FontAwesomeIcon,
+    FontAwesome5,
+    FontAwesome6,
+    EntypoIcon,
+    AntDesignIcon,
+  ];
 
   const libNameIconMap: Record<TIconLibType, any> = {
     AntDesign: AntDesignIcon,
@@ -19,7 +28,7 @@ const Icon: IIcon = props => {
     FontAwesome: FontAwesomeIcon,
   };
 
-  let IconComponent = FontAwesomeIcon;
+  let IconComponent: any = Fragment;
 
   //   get from the specific lib
   if (lib) {
@@ -34,7 +43,17 @@ const Icon: IIcon = props => {
     }
   }
 
-  return <IconComponent name={name} size={size} color={color} style={style} />;
+  if (IconComponent == Fragment) return <Fragment />;
+
+  return (
+    <IconComponent
+      onPress={props.onPress}
+      name={name}
+      size={size}
+      color={color}
+      style={style}
+    />
+  );
 };
 
 export default Icon;

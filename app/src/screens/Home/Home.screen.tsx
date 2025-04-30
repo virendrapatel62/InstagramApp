@@ -1,12 +1,16 @@
 import { View } from 'react-native';
-import { Text } from '../../components/atoms';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import HomeHeader from '../../components/organisms/HomeHeader/HomeHeader.component';
 
 export default function HomeScreen() {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text color="black" size="xxl" weight="bold">
-        Home
-      </Text>
-    </View>
+    <SafeAreaView
+      style={{
+        flex: 1,
+      }}>
+      <View>
+        <HomeHeader />
+      </View>
+    </SafeAreaView>
   );
 }
