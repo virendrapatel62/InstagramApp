@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Svg, { G, Path } from 'react-native-svg';
 import { useTheme } from '../../../theme';
-/* SVGR has dropped some elements not supported by react-native-svg: style */
 const Logo = (props: any) => {
   const { theme } = useTheme();
   return (

@@ -10,6 +10,7 @@ import HomeScreen from './src/screens/Home/Home.screen';
 import NewPostScreen from './src/screens/NewPost/NewPost.screen';
 import PlaceholderScreen from './src/screens/Placeholder/Placeholder.screen';
 import { ThemeProvider, useTheme } from './src/theme';
+import SplashScreen from './src/screens/Splash/Splash.screen';
 
 const Stack = createNativeStackNavigator();
 const BottomTabNavigator = createBottomTabNavigator();
@@ -133,6 +134,14 @@ function RootStack() {
     <Stack.Navigator>
       <Stack.Screen
         options={commonOptions}
+        name="Splash"
+        component={SplashScreen}
+      />
+      <Stack.Screen
+        options={{
+          ...commonOptions,
+          animation: 'fade',
+        }}
         name="Home"
         component={BottomTabScreens}
       />

@@ -15,7 +15,7 @@ const ScreenWrapper = (props: IScreenWrapperProps) => {
 
   const containerStyle = [
     styles.container,
-    { backgroundColor: theme.background, marginBottom: -20 },
+    { backgroundColor: theme.background, marginBottom: -30 },
   ];
 
   return (
