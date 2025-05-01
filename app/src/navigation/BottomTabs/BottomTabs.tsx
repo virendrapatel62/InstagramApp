@@ -1,0 +1,77 @@
+import React, { Fragment } from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { TouchableWithoutFeedback, View } from 'react-native';
+import { useTheme } from '../../theme';
+import { Icon, Image } from '../../components/atoms';
+import ReelIcon from '../../components/icons/Reel.icon';
+import { placeholderProfilePicture } from '../../lib/images';
+
+import HomeScreen from '../../screens/Home/Home.screen';
+import NewPostScreen from '../../screens/NewPost/NewPost.screen';
+import PlaceholderScreen from '../../screens/Placeholder/Placeholder.screen';
+import { bottomTabsConfig } from '../config/BottomTab.config';
+
+const BottomTabNavigator = createBottomTabNavigator();
+
+const renderIcon = (tabName: string, size = 24) => {
+  switch (tabName) {
+    case 'home':
+      return <Icon size={size} name="home" lib="Entypo" />;
+    case 'search':
+      return <Icon size={size} name="search1" lib="AntDesign" />;
+    case 'post':
+      return <Icon size={size + 2} name="plus-square-o" />;
+    case 'reels':
+      return <ReelIcon size={size - 2} />;
+    case 'profile':
+      return (
+        <Image
+          src={placeholderProfilePicture}
+          height={size}
+          aspectRatio={1}
+          rounded
+        />
+      );
+    default:
+      return <Fragment />;
+  }
+};
+
+export default function BottomTabs() {
+  const { theme } = useTheme();
+
+  const commonOptions = {
+    tabBarShowLabel: false,
+    headerShown: false,
+    tabBarButton(props: any) {
+      return (
+        <TouchableWithoutFeedback onPress={props.onPress}>
+          <View {...props}>{props.children}</View>
+        </TouchableWithoutFeedback>
+      );
+    },
+  };
+
+  return (
+    <BottomTabNavigator.Navigator
+      screenOptions={{
+        tabBarStyle: {
+          backgroundColor: theme.background,
+          borderTopColor: theme.border,
+        },
+      }}>
+      {bottomTabsConfig.map(tab => (
+        <BottomTabNavigator.Screen
+          key={tab.name}
+          name={tab.name}
+          component={tab.component}
+          options={{
+            ...commonOptions,
+            tabBarIcon: tab.icon,
+            headerShown: !!tab.options?.headerShown,
+          }}
+        />
+      ))}
+    </BottomTabNavigator.Navigator>
+  );
+}

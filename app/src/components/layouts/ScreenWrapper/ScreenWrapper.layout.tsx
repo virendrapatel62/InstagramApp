@@ -1,7 +1,7 @@
 import React, { Fragment, PropsWithChildren } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { useTheme } from '../../../theme';
+import { StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useTheme } from '../../../theme';
 
 interface IScreenWrapperProps extends PropsWithChildren {
   safeArea?: boolean;
@@ -15,7 +15,7 @@ const ScreenWrapper = (props: IScreenWrapperProps) => {
 
   const containerStyle = [
     styles.container,
-    { backgroundColor: theme.background, marginBottom: -30 },
+    { backgroundColor: theme.background, marginBottom: -20 },
   ];
 
   return (

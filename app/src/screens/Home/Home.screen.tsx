@@ -1,10 +1,8 @@
-import { ScrollView, View } from 'react-native';
-import HomeHeader from '../../components/organisms/HomeHeader/HomeHeader.component';
+import { ScrollView } from 'react-native';
 import ScreenWrapper from '../../components/layouts/ScreenWrapper/ScreenWrapper.layout';
-import { Text } from '../../components/atoms';
-import Flex from '../../components/atoms/Flex/Flex.component';
-import StoryList from '../../components/organisms/StoryList/StoryList.component';
+import HomeHeader from '../../components/organisms/HomeHeader/HomeHeader.component';
 import PostList from '../../components/organisms/PostList/PostList.component';
+import StoryList from '../../components/organisms/StoryList/StoryList.component';
 
 export default function HomeScreen() {
   return (
