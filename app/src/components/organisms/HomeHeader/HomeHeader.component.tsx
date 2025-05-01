@@ -21,15 +21,13 @@ function HomeHeader() {
   };
 
   return (
-    <View>
-      <View style={styles.headerContainer}>
-        <View style={styles.logoWrapper}>
-          <Logo style={styles.logo} />
-        </View>
-        <View style={styles.iconContainer}>
-          <Icon onPress={handleNoficationIconClick} name="heart-o" />
-          <FacebookMassanger onPress={handleMessageIconClick} size={22} />
-        </View>
+    <View style={styles.headerContainer}>
+      <View style={styles.logoWrapper}>
+        <Logo style={styles.logo} />
+      </View>
+      <View style={styles.iconContainer}>
+        <Icon onPress={handleNoficationIconClick} name="heart-o" />
+        <FacebookMassanger onPress={handleMessageIconClick} size={22} />
       </View>
     </View>
   );

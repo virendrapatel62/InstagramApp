@@ -9,11 +9,13 @@ import { placeholderProfilePicture } from './src/lib/images';
 import HomeScreen from './src/screens/Home/Home.screen';
 import NewPostScreen from './src/screens/NewPost/NewPost.screen';
 import PlaceholderScreen from './src/screens/Placeholder/Placeholder.screen';
+import { ThemeProvider, useTheme } from './src/theme';
 
 const Stack = createNativeStackNavigator();
 const BottomTabNavigator = createBottomTabNavigator();
 
 function BottomTabScreens() {
+  const { theme } = useTheme();
   const commonOptions = {
     tabBarShowLabel: false,
     headerShown: false,
@@ -71,7 +73,13 @@ function BottomTabScreens() {
   };
 
   return (
-    <BottomTabNavigator.Navigator screenOptions={{}}>
+    <BottomTabNavigator.Navigator
+      screenOptions={{
+        tabBarStyle: {
+          backgroundColor: theme.background, // 🟣 Set background from theme
+          borderTopColor: theme.border, // Optional: match top border
+        },
+      }}>
       <BottomTabNavigator.Screen
         name="Home"
         options={{
@@ -144,9 +152,11 @@ function RootStack() {
 
 function App() {
   return (
-    <NavigationContainer>
-      <RootStack />
-    </NavigationContainer>
+    <ThemeProvider>
+      <NavigationContainer>
+        <RootStack />
+      </NavigationContainer>
+    </ThemeProvider>
   );
 }
 

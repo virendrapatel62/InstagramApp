@@ -1,13 +1,15 @@
 import * as React from 'react';
 import Svg, { G, Path } from 'react-native-svg';
 import { IconComponent } from './Icons.types';
+import { useTheme } from '../../theme';
 
 const ReelIcon: IconComponent = props => {
   const size = props.size || 20;
+  const { theme } = useTheme();
   return (
     <Svg
       id="Layer_1"
-      fill={props.color}
+      fill={theme.icon || props.color}
       x="0px"
       y="0px"
       viewBox="0 0 122.14 122.88"

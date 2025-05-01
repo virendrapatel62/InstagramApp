@@ -6,6 +6,7 @@ import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import { IIcon, TIconLibType } from './Icon.types';
+import { useTheme } from '../../../theme';
 
 /**
  * @reference :
@@ -14,6 +15,7 @@ import { IIcon, TIconLibType } from './Icon.types';
 
 const Icon: IIcon = props => {
   const { name, size = 24, color = '#000', style, lib } = props;
+  const { theme } = useTheme();
   const IconComponents = [
     FontAwesomeIcon,
     FontAwesome5,
@@ -50,7 +52,7 @@ const Icon: IIcon = props => {
       onPress={props.onPress}
       name={name}
       size={size}
-      color={color}
+      color={theme.icon}
       style={style}
     />
   );

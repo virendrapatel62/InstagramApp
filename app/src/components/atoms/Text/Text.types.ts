@@ -1,12 +1,11 @@
-import {TextProps} from 'react-native';
-import {fontSizes, fontWeights} from '../font';
-import colors from '../colors';
-import {FunctionComponent, PropsWithChildren} from 'react';
+import { FunctionComponent, PropsWithChildren } from 'react';
+import { TextProps } from 'react-native';
+import { fontSizes, fontWeights } from '../font';
 
 export interface ITextProps extends TextProps {
   size?: keyof typeof fontSizes;
   weight?: keyof typeof fontWeights;
-  color?: keyof typeof colors;
+  color?: string;
   children: React.ReactNode;
 }
 

@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingRight: 16,
+    paddingVertical: 16,
   },
   logoWrapper: {
     width: 150,
