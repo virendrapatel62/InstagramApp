@@ -1,19 +1,14 @@
-import React, { Fragment } from 'react';
-import {
-  Touchable,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
-import { Icon, Image, Text } from './src/components/atoms';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React, { Fragment } from 'react';
+import { TouchableWithoutFeedback, View } from 'react-native';
+import { Icon, Image } from './src/components/atoms';
 import ReelIcon from './src/components/icons/Reel.icon';
 import { placeholderProfilePicture } from './src/lib/images';
 import HomeScreen from './src/screens/Home/Home.screen';
-import PlaceholderScreen from './src/screens/Placeholder/Placeholder.screen';
 import NewPostScreen from './src/screens/NewPost/NewPost.screen';
+import PlaceholderScreen from './src/screens/Placeholder/Placeholder.screen';
 
 const Stack = createNativeStackNavigator();
 const BottomTabNavigator = createBottomTabNavigator();
