@@ -4,16 +4,15 @@ import { Image } from '../../atoms';
 import { ViewStyle } from 'react-native';
 import Flex from '../../atoms/Flex/Flex.component';
 
-interface IStoryItemProps {
-  seen?: boolean;
+interface IPostProps {
   thumbnail: string;
   style?: ViewStyle;
 }
 
-export default function StoryItem(props: IStoryItemProps) {
+export default function Post(props: IPostProps) {
   return (
-    <Flex style={props.style}>
-      <Image rounded height={80} aspectRatio={1} src={props.thumbnail}></Image>
+    <Flex>
+      <Image width={'100%'} aspectRatio={0.9} src={props.thumbnail}></Image>
     </Flex>
   );
 }

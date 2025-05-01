@@ -5,7 +5,13 @@ import ScreenWrapper from '../../components/layouts/ScreenWrapper/ScreenWrapper.
 export default function PlaceholderScreen(props: { name: string }) {
   return (
     <ScreenWrapper>
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <View
+        style={{
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: 'red',
+        }}>
         <Text size="xxl" weight="bold">
           {props.name}
         </Text>
