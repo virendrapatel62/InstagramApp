@@ -13,7 +13,7 @@ import ReelIcon from './src/components/icons/Reel.icon';
 import { placeholderProfilePicture } from './src/lib/images';
 import HomeScreen from './src/screens/Home/Home.screen';
 import PlaceholderScreen from './src/screens/Placeholder/Placeholder.screen';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import NewPostScreen from './src/screens/NewPost/NewPost.screen';
 
 const Stack = createNativeStackNavigator();
 const BottomTabNavigator = createBottomTabNavigator();
@@ -99,7 +99,7 @@ function BottomTabScreens() {
           tabBarIcon: () => renderIcon('post'),
           ...commonOptions,
         }}
-        component={() => <PlaceholderScreen name="Create Post" />}
+        component={NewPostScreen}
       />
       <BottomTabNavigator.Screen
         name="reels"
