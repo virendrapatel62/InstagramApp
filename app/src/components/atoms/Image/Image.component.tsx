@@ -3,10 +3,9 @@ import { Image as NativeImage, StyleSheet, ImageStyle } from 'react-native';
 import { IImage } from './Image.types';
 
 const Image: IImage = props => {
-  const { src, height = 100, aspectRatio = 1, rounded = false, style } = props;
+  const { src, height, aspectRatio = 1, rounded = false, style } = props;
 
-  const borderRadius =
-    typeof rounded === 'number' ? rounded : rounded ? height / 2 : 0;
+  const borderRadius = typeof rounded === 'number' ? rounded : rounded ? 50 : 0;
 
   return (
     <NativeImage
@@ -14,8 +13,9 @@ const Image: IImage = props => {
       resizeMode="cover"
       style={[
         {
-          height,
-          width: height * aspectRatio,
+          height: height || 'auto',
+          width: 'auto',
+          aspectRatio: aspectRatio,
           borderRadius,
         },
         style,
