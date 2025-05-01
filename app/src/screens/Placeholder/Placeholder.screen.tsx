@@ -10,7 +10,6 @@ export default function PlaceholderScreen(props: { name: string }) {
           flex: 1,
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: 'red',
         }}>
         <Text size="xxl" weight="bold">
           {props.name}
