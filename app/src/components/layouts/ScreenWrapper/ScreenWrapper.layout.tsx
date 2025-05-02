@@ -15,11 +15,11 @@ const ScreenWrapper = (props: IScreenWrapperProps) => {
 
   const containerStyle = [
     styles.container,
-    { backgroundColor: theme.background, marginBottom: -20 },
+    { backgroundColor: theme.background },
   ];
 
   return (
-    <Wrapper style={containerStyle}>
+    <Wrapper style={containerStyle} edges={['top', 'left', 'right']}>
       <View style={styles.container}>{children}</View>
     </Wrapper>
   );

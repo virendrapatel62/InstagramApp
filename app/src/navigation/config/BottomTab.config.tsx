@@ -1,28 +1,31 @@
-import React, { Fragment, ReactNode } from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { TouchableWithoutFeedback, View } from 'react-native';
-import { useTheme } from '../../theme';
+import React, { ReactNode } from 'react';
 import { Icon, Image } from '../../components/atoms';
 import ReelIcon from '../../components/icons/Reel.icon';
 import { placeholderProfilePicture } from '../../lib/images';
 
+import { StackAnimationTypes } from 'react-native-screens';
+import { navigateToSearchScreen, SCREENS } from '..';
+import ExploreReels from '../../screens/ExploreReels/ExploreReels.screen';
 import HomeScreen from '../../screens/Home/Home.screen';
 import NewPostScreen from '../../screens/NewPost/NewPost.screen';
-import PlaceholderScreen from '../../screens/Placeholder/Placeholder.screen';
-import { SCREENS } from '..';
-import { StackAnimationTypes } from 'react-native-screens';
+import Profile from '../../screens/Profile/Profile.screen';
+import SearchScreen from '../../screens/Search/Search.screen';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 export interface IScreenConfig {
   name: string;
-  component: React.FC;
+  component: (props: any) => ReactNode;
   icon?: () => ReactNode;
   options?: {
     headerShown?: boolean;
     animation?: StackAnimationTypes;
   };
+  onLongPress?: () => void;
 }
 
-export const bottomTabsConfig: IScreenConfig[] = [
+export const getBottomTabsConfig: (
+  navigation: any,
+) => IScreenConfig[] = navigation => [
   {
     name: SCREENS.HOME,
     component: HomeScreen,
@@ -31,9 +34,15 @@ export const bottomTabsConfig: IScreenConfig[] = [
   },
   {
     name: SCREENS.SEARCH,
-    component: () => <PlaceholderScreen name="Search" />,
+    component: SearchScreen,
     icon: () => <Icon name="search1" lib="AntDesign" size={24} />,
     options: {},
+    onLongPress() {
+      console.log('Navigating...');
+      navigateToSearchScreen(navigation, {
+        fromLongPress: true,
+      });
+    },
   },
   {
     name: SCREENS.POST,
@@ -43,13 +52,13 @@ export const bottomTabsConfig: IScreenConfig[] = [
   },
   {
     name: SCREENS.REELS,
-    component: () => <PlaceholderScreen name="Reels" />,
+    component: ExploreReels,
     icon: () => <ReelIcon size={22} />,
     options: {},
   },
   {
     name: SCREENS.PROFILE,
-    component: () => <PlaceholderScreen name="Profile" />,
+    component: Profile,
     icon: () => (
       <Image
         src={placeholderProfilePicture}

@@ -1,10 +1,12 @@
 import { useNavigation } from '@react-navigation/native';
+import { Screen } from 'react-native-screens';
 
 export { useNavigation };
 
 export const SCREENS = {
   SPLASH: 'Splash',
   HOME: 'Home',
+  HOME_TABS: 'HomeTabs',
   SEARCH: 'Search',
   POST: 'Post',
   REELS: 'Reels',
@@ -28,5 +30,17 @@ export function navigateToNotifications(
 export function navigateToHomeScreen(
   navigation: ReturnType<typeof useNavigation<any>>,
 ) {
-  navigation.navigate(SCREENS.HOME);
+  navigation.navigate(SCREENS.HOME_TABS);
+}
+
+export function navigateToSearchScreen(
+  navigation: ReturnType<typeof useNavigation<any>>,
+  options?: {
+    fromLongPress?: boolean;
+  },
+) {
+  navigation.navigate(SCREENS.HOME_TABS, {
+    screen: SCREENS.SEARCH,
+    params: options,
+  });
 }

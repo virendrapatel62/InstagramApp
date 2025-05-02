@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { TouchableWithoutFeedback, View } from 'react-native';
+import { TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import { useTheme } from '../../theme';
 import { Icon, Image } from '../../components/atoms';
 import ReelIcon from '../../components/icons/Reel.icon';
@@ -9,7 +9,9 @@ import { placeholderProfilePicture } from '../../lib/images';
 import HomeScreen from '../../screens/Home/Home.screen';
 import NewPostScreen from '../../screens/NewPost/NewPost.screen';
 import PlaceholderScreen from '../../screens/Placeholder/Placeholder.screen';
-import { bottomTabsConfig } from '../config/BottomTab.config';
+import { getBottomTabsConfig } from '../config/BottomTab.config';
+import Flex from '../../components/atoms/Flex/Flex.component';
+import { useNavigation } from '..';
 
 const BottomTabNavigator = createBottomTabNavigator();
 
@@ -39,6 +41,8 @@ const renderIcon = (tabName: string, size = 24) => {
 
 export default function BottomTabs() {
   const { theme } = useTheme();
+  const navigation = useNavigation();
+  const config = getBottomTabsConfig(navigation);
 
   const commonOptions = {
     tabBarShowLabel: false,
@@ -59,8 +63,11 @@ export default function BottomTabs() {
           backgroundColor: theme.background,
           borderTopColor: theme.border,
         },
+        tabBarItemStyle: {
+          paddingTop: 8,
+        },
       }}>
-      {bottomTabsConfig.map(tab => (
+      {config.map(tab => (
         <BottomTabNavigator.Screen
           key={tab.name}
           name={tab.name}
@@ -69,6 +76,22 @@ export default function BottomTabs() {
             ...commonOptions,
             tabBarIcon: tab.icon,
             headerShown: !!tab.options?.headerShown,
+            tabBarButton(props) {
+              return (
+                <TouchableOpacity
+                  activeOpacity={1}
+                  style={{
+                    flex: 1,
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                  onLongPress={tab.onLongPress}
+                  onPress={props.onPress}
+                  key={tab.name}>
+                  {props.children}
+                </TouchableOpacity>
+              );
+            },
           }}
         />
       ))}

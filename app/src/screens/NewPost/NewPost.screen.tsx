@@ -1,15 +1,14 @@
 import { View } from 'react-native';
 import { Text } from '../../components/atoms';
 import ScreenWrapper from '../../components/layouts/ScreenWrapper/ScreenWrapper.layout';
+import Flex from '../../components/atoms/Flex/Flex.component';
 
 export default function NewPostScreen() {
   return (
     <ScreenWrapper>
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text size="xxl" weight="bold">
-          New Post Screen
-        </Text>
-      </View>
+      <Flex fill center>
+        <Text size="title">New Post Screen</Text>
+      </Flex>
     </ScreenWrapper>
   );
 }

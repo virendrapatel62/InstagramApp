@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
-import { Image, Text } from '../../components/atoms';
+import { Text } from '../../components/atoms';
 import Flex from '../../components/atoms/Flex/Flex.component';
+import InstgramImageLogo from '../../components/atoms/Logo/ImageLogo.component';
 import ScreenWrapper from '../../components/layouts/ScreenWrapper/ScreenWrapper.layout';
-import { instagramImageLogo } from '../../lib/images';
 import { navigateToHomeScreen, useNavigation } from '../../navigation';
 import { useTheme } from '../../theme';
-import PlaceholderScreen from '../Placeholder/Placeholder.screen';
 
 export default function SplashScreen() {
   const { theme } = useTheme();
@@ -21,11 +20,7 @@ export default function SplashScreen() {
     <ScreenWrapper>
       <Flex fill>
         <Flex grow={9} center>
-          <Image
-            src={instagramImageLogo}
-            width={70}
-            height={70}
-            aspectRatio={1}></Image>
+          <InstgramImageLogo width={70} height={70} />
         </Flex>
         <Flex grow={1} center>
           <Text color={theme.textSecondary}>from</Text>
