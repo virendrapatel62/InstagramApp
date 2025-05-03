@@ -6,6 +6,8 @@ import ScreenWrapper from '../../components/layouts/ScreenWrapper/ScreenWrapper.
 import { navigateToHomeScreen, useNavigation } from '../../navigation';
 import { useTheme } from '../../theme';
 
+const SPLASH_SCREEN_TIMEOUT = 1000;
+
 export default function SplashScreen() {
   const { theme } = useTheme();
   const navigation = useNavigation();
@@ -13,7 +15,7 @@ export default function SplashScreen() {
   useEffect(() => {
     setTimeout(() => {
       navigateToHomeScreen(navigation);
-    }, 3000);
+    }, SPLASH_SCREEN_TIMEOUT);
   }, []);
 
   return (

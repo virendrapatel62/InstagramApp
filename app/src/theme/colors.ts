@@ -38,6 +38,8 @@ export const lightTheme = {
   lightGray: '#f2f2f2',
   gray: '#cccccc',
   darkGray: '#333333',
+
+  imagePlaceHolder: '#f0f2f5',
 };
 
 export const darkTheme = {
@@ -72,4 +74,6 @@ export const darkTheme = {
   lightGray: '#2c2c2e',
   gray: '#3a3a3c',
   darkGray: '#1c1c1e',
+
+  imagePlaceHolder: '#2c2c2e',
 };

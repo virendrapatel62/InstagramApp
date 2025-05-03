@@ -10,7 +10,6 @@ import HomeScreen from '../../screens/Home/Home.screen';
 import NewPostScreen from '../../screens/NewPost/NewPost.screen';
 import Profile from '../../screens/Profile/Profile.screen';
 import SearchScreen from '../../screens/Search/Search.screen';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 export interface IScreenConfig {
   name: string;
@@ -38,7 +37,6 @@ export const getBottomTabsConfig: (
     icon: () => <Icon name="search1" lib="AntDesign" size={24} />,
     options: {},
     onLongPress() {
-      console.log('Navigating...');
       navigateToSearchScreen(navigation, {
         fromLongPress: true,
       });

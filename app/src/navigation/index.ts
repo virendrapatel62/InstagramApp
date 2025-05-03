@@ -1,5 +1,4 @@
 import { useNavigation } from '@react-navigation/native';
-import { Screen } from 'react-native-screens';
 
 export { useNavigation };
 

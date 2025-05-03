@@ -1,17 +1,13 @@
-import React, { Fragment } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import React, { Fragment } from 'react';
 import { TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
-import { useTheme } from '../../theme';
 import { Icon, Image } from '../../components/atoms';
 import ReelIcon from '../../components/icons/Reel.icon';
 import { placeholderProfilePicture } from '../../lib/images';
+import { useTheme } from '../../theme';
 
-import HomeScreen from '../../screens/Home/Home.screen';
-import NewPostScreen from '../../screens/NewPost/NewPost.screen';
-import PlaceholderScreen from '../../screens/Placeholder/Placeholder.screen';
-import { getBottomTabsConfig } from '../config/BottomTab.config';
-import Flex from '../../components/atoms/Flex/Flex.component';
 import { useNavigation } from '..';
+import { getBottomTabsConfig } from '../config/BottomTab.config';
 
 const BottomTabNavigator = createBottomTabNavigator();
 
