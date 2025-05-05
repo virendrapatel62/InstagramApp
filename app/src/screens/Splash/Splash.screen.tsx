@@ -25,8 +25,8 @@ export default function SplashScreen() {
           <InstgramImageLogo width={70} height={70} />
         </Flex>
         <Flex grow={1} center>
-          <Text color={theme.textSecondary}>from</Text>
-          <Text size="xl" color={theme.textSecondary}>
+          <Text color={theme.colors.textSecondary}>from</Text>
+          <Text size="xl" color={theme.colors.textSecondary}>
             Jhetha
           </Text>
         </Flex>

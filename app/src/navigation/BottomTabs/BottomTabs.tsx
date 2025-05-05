@@ -56,8 +56,8 @@ export default function BottomTabs() {
     <BottomTabNavigator.Navigator
       screenOptions={{
         tabBarStyle: {
-          backgroundColor: theme.background,
-          borderTopColor: theme.border,
+          backgroundColor: theme.colors.background,
+          borderTopColor: theme.colors.border,
         },
         tabBarItemStyle: {
           paddingTop: 8,

@@ -9,7 +9,7 @@ const ReelIcon: IconComponent = props => {
   return (
     <Svg
       id="Layer_1"
-      fill={theme.icon || props.color}
+      fill={theme.colors.icon || props.color}
       x="0px"
       y="0px"
       viewBox="0 0 122.14 122.88"

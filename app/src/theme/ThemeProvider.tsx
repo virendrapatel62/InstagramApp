@@ -2,10 +2,18 @@ import React, { createContext, useEffect, useMemo, useState } from 'react';
 import { Appearance, StatusBar } from 'react-native';
 import { darkTheme, lightTheme } from './colors';
 import { IThemeContextValue, TThemeProvider } from './theme.types';
+import { fontSizes, fontWeights } from '../components/atoms';
 
-export const ThemeContext = createContext<IThemeContextValue>({
-  theme: lightTheme,
+const defaultValues = {
+  theme: {
+    colors: lightTheme,
+    fontSizes: fontSizes,
+    fontWeights: fontWeights,
+  },
   isDark: false,
+};
+export const ThemeContext = createContext<IThemeContextValue>({
+  ...defaultValues,
 });
 
 const ThemeProvider: TThemeProvider = ({ children }) => {
@@ -23,9 +31,13 @@ const ThemeProvider: TThemeProvider = ({ children }) => {
 
   const value = useMemo(() => {
     return {
-      theme: isDark ? darkTheme : lightTheme,
+      ...defaultValues,
       isDark,
       toggleTheme,
+      theme: {
+        ...defaultValues.theme,
+        colors: isDark ? darkTheme : lightTheme,
+      },
     };
   }, [isDark]);
 
