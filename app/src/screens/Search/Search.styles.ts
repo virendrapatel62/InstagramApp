@@ -25,7 +25,7 @@ export default function createStyles(theme: ThemeType, isDark: boolean) {
       paddingLeft: 42,
       backgroundColor: isDark ? '#2c2c2e' : '#fff',
       fontSize: 16,
-      color: theme.textSecondary,
+      color: theme.colors.textSecondary,
     },
   });
 }

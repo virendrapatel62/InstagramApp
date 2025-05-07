@@ -6,7 +6,7 @@ export const fontSizes = {
   xl: 18, // extra large (e.g., buttons, bold text)
   xxl: 22, // big (e.g., section headers)
   title: 28, // titles or large headers
-};
+} as const;
 
 export const fontWeights = {
   thin: 100,
@@ -18,4 +18,4 @@ export const fontWeights = {
   bold: 700,
   extraBold: 800,
   black: 900,
-};
+} as const;

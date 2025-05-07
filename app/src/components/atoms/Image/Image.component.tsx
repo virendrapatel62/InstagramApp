@@ -20,7 +20,7 @@ const Image: IImage = props => {
           width: width,
           aspectRatio,
           borderRadius,
-          backgroundColor: theme.imagePlaceHolder,
+          backgroundColor: theme.colors.imagePlaceHolder,
         },
         style,
       ]}

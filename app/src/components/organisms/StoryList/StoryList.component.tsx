@@ -1,9 +1,9 @@
-import React, { useMemo, useReducer, useRef } from 'react';
-import { ScrollView } from 'react-native';
-import Flex from '../../atoms/Flex/Flex.component';
-import StoryItem from '../../molecules/StoryItem/StoryItem.component';
+import React, { useRef } from 'react';
+import { View } from 'react-native';
 import { getRandomImage } from '../../../lib/seed';
 import { useTheme } from '../../../theme';
+import ListView from '../../layouts/ListView/ListView.component';
+import StoryItem from '../../molecules/StoryItem/StoryItem.component';
 import createStyles from './StoryList.styles';
 
 export default function StoryList() {
@@ -25,19 +25,19 @@ export default function StoryList() {
   };
 
   return (
-    <Flex>
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.stories}>
-        {stories.map((story, index) => (
-          <StoryItem
-            style={getStoryItemStyles(index)}
-            thumbnail={story}
-            key={story}
-          />
-        ))}
-      </ScrollView>
-    </Flex>
+    <ListView
+      data={stories}
+      horizontal
+      keyExtractor={(item, index) => index.toString()}
+      showsHorizontalScrollIndicator={false}
+      ItemSeparatorComponent={() => <View style={{ width: 8 }} />}
+      renderItem={({ item, index }) => (
+        <StoryItem
+          style={getStoryItemStyles(index)}
+          thumbnail={item}
+          key={index}
+        />
+      )}
+    />
   );
 }

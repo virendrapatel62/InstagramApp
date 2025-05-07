@@ -52,7 +52,7 @@ const Icon: IIcon = props => {
       onPress={props.onPress}
       name={name}
       size={size}
-      color={theme.icon}
+      color={color || theme.colors.icon}
       style={style}
     />
   );
