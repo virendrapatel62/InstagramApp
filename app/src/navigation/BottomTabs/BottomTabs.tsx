@@ -6,7 +6,7 @@ import ReelIcon from '../../components/icons/Reel.icon';
 import { placeholderProfilePicture } from '../../lib/images';
 import { useTheme } from '../../theme';
 
-import { useNavigation } from '..';
+import { SCREENS, useNavigation } from '..';
 import { getBottomTabsConfig } from '../config/BottomTab.config';
 
 const BottomTabNavigator = createBottomTabNavigator();
@@ -54,6 +54,7 @@ export default function BottomTabs() {
 
   return (
     <BottomTabNavigator.Navigator
+      initialRouteName={SCREENS.POST}
       screenOptions={{
         tabBarStyle: {
           backgroundColor: theme.colors.background,
@@ -63,34 +64,38 @@ export default function BottomTabs() {
           paddingTop: 8,
         },
       }}>
-      {config.map(tab => (
-        <BottomTabNavigator.Screen
-          key={tab.name}
-          name={tab.name}
-          component={tab.component}
-          options={{
-            ...commonOptions,
-            tabBarIcon: tab.icon,
-            headerShown: !!tab.options?.headerShown,
-            tabBarButton(props) {
-              return (
-                <TouchableOpacity
-                  activeOpacity={1}
-                  style={{
-                    flex: 1,
-                    display: 'flex',
-                    alignItems: 'center',
-                  }}
-                  onLongPress={tab.onLongPress}
-                  onPress={props.onPress}
-                  key={tab.name}>
-                  {props.children}
-                </TouchableOpacity>
-              );
-            },
-          }}
-        />
-      ))}
+      {config.map(tab => {
+        return (
+          <BottomTabNavigator.Screen
+            key={tab.name}
+            name={tab.name}
+            component={tab.component}
+            options={{
+              ...commonOptions,
+              tabBarStyle: tab?.options?.tabBarStyle,
+              tabBarIcon: tab.icon,
+              headerShown: !!tab.options?.headerShown,
+              animation: 'shift',
+              tabBarButton(props) {
+                return (
+                  <TouchableOpacity
+                    activeOpacity={1}
+                    style={{
+                      flex: 1,
+                      display: 'flex',
+                      alignItems: 'center',
+                    }}
+                    onLongPress={tab.onLongPress}
+                    onPress={props.onPress}
+                    key={tab.name}>
+                    {props.children}
+                  </TouchableOpacity>
+                );
+              },
+            }}
+          />
+        );
+      })}
     </BottomTabNavigator.Navigator>
   );
 }

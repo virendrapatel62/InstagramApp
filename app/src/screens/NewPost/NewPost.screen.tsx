@@ -1,32 +1,179 @@
-import { View } from 'react-native';
-import { Text } from '../../components/atoms';
-import ScreenWrapper from '../../components/layouts/ScreenWrapper/ScreenWrapper.layout';
+import { useNavigation } from '@react-navigation/native';
+import { Fragment, useEffect, useLayoutEffect, useMemo, useState } from 'react';
+import { Dimensions, FlatList, Pressable, ScrollView } from 'react-native';
+import { Box, Spacer } from 'react-native-flex-layout';
+import { Icon, Image, Text } from '../../components/atoms';
 import Flex from '../../components/atoms/Flex/Flex.component';
+import ScreenWrapper from '../../components/layouts/ScreenWrapper/ScreenWrapper.layout';
+import {
+  getAllGallaryImages,
+  IGallaryImages,
+} from '../../services/galleryService';
+
+const HeaderRight = (props: any) => (
+  <Box mr={16}>
+    <Pressable onPress={props.onNext}>
+      <Text size="lg" weight="semiBold">
+        Next
+      </Text>
+    </Pressable>
+  </Box>
+);
+
+const HeaderLeft = (props: any) => {
+  return (
+    <Box mh={16}>
+      <Icon
+        onPress={props.onPress}
+        size={24}
+        name="close"
+        lib="AntDesign"></Icon>
+    </Box>
+  );
+};
 
 export default function NewPostScreen() {
+  const navigation = useNavigation();
+  const [selectedImages, setSelectedImages] = useState<any[]>([]);
+  const [allImages, setAllImages] = useState<IGallaryImages[]>([]);
+
+  // Memoizing the selected images map for performance optimization
+  const selectedImagesMap: Record<string, boolean> = useMemo(() => {
+    return selectedImages.reduce((acc, image) => {
+      acc[image.id] = true;
+      return acc;
+    }, {});
+  }, [selectedImages]);
+
+  const isSelected = (id: string) => {
+    return selectedImagesMap[id];
+  };
+
+  // Function to toggle the selection of images
+  const toggleSelection = (image: IGallaryImages) => {
+    setSelectedImages(prevSelectedImages => {
+      if (isSelected(image.id)) {
+        // If the image is already selected, remove it
+        return prevSelectedImages.filter(
+          selectedImage => selectedImage.id !== image.id,
+        );
+      } else {
+        // Otherwise, add the image to the selection
+        return [...prevSelectedImages, image];
+      }
+    });
+  };
+
+  const getAllImages = () => {
+    setSelectedImages([]);
+    setAllImages([]);
+    getAllGallaryImages().then(images => {
+      setAllImages(images);
+    });
+  };
+
+  const handleOnNext = () => {
+    if (!selectedImages.length) return;
+
+    console.log({ selectedImages });
+  };
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => <HeaderRight onNext={handleOnNext} />,
+      headerLeft: () => <HeaderLeft onPress={() => navigation.goBack()} />,
+      title: 'New Post',
+    });
+  }, [navigation, handleOnNext]);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      getAllImages();
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
   return (
-    <ScreenWrapper>
-      <Flex fill center>
-        <Text size="title">New Post Screen</Text>
+    <ScreenWrapper safeArea={false}>
+      <Flex fill direction="column">
+        {/* Selected Images List */}
+        {!!selectedImages?.length && (
+          <Box h={Dimensions.get('window').height * 0.3}>
+            <FlatList
+              style={{
+                flex: 1,
+                height: 300,
+              }}
+              data={selectedImages}
+              keyExtractor={(item, index) => index.toString()}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              renderItem={({ item }) => (
+                <Image
+                  source={{ uri: item.uri }}
+                  rounded={16}
+                  aspectRatio={1}
+                  height={'100%'}
+                />
+              )}
+              contentContainerStyle={{
+                padding: 8,
+              }}
+              ItemSeparatorComponent={() => <Spacer p={4} />}
+            />
+          </Box>
+        )}
+
+        {/* All Images Grid */}
+        <Box
+          style={{
+            flex: 1,
+          }}>
+          <ScrollView
+            contentContainerStyle={{
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+            }}>
+            {allImages.map(image => (
+              <Pressable
+                onPress={() => toggleSelection(image)} // Toggle selection on click
+                key={image.id}>
+                <Flex
+                  p={2}
+                  justify="center"
+                  items="center"
+                  style={{
+                    position: 'relative',
+                  }}
+                  w={Dimensions.get('window').width / 3}>
+                  {isSelected(image.id) && (
+                    <Fragment>
+                      <Box position="absolute" zIndex={2} p={4}>
+                        <Icon name="check" color="white" size={42} />
+                      </Box>
+                      <Box
+                        position="absolute"
+                        w={'100%'}
+                        h={'100%'}
+                        zIndex={1}
+                        style={{
+                          backgroundColor: 'rgba(0, 0, 0, 0.4)', // Black overlay
+                        }}></Box>
+                    </Fragment>
+                  )}
+                  <Image
+                    source={{
+                      uri: image.uri,
+                    }}
+                    width={'100%'}
+                    aspectRatio={1}></Image>
+                </Flex>
+              </Pressable>
+            ))}
+          </ScrollView>
+        </Box>
       </Flex>
     </ScreenWrapper>
   );
 }
-
-/* <Button
-title="single file import"
-onPress={async () => {
-  try {
-    const [pickResult] = await pick();
-    console.log(pickResult);
-
-    viewDocument({
-      uri: pickResult.uri,
-      mimeType: pickResult.type || 'img/jpg',
-    }).catch(console.error);
-  } catch (err: unknown) {
-    // see error handling
-    console.log(err);
-  }
-}}
-/> */

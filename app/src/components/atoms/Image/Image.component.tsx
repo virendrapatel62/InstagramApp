@@ -14,6 +14,7 @@ const Image: IImage = props => {
     <NativeImage
       src={src}
       resizeMode="cover"
+      source={props.source}
       style={[
         {
           height: height,

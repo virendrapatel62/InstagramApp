@@ -18,6 +18,7 @@ export interface IScreenConfig {
   options?: {
     headerShown?: boolean;
     animation?: StackAnimationTypes;
+    tabBarStyle?: Object;
   };
   onLongPress?: () => void;
 }
@@ -46,7 +47,12 @@ export const getBottomTabsConfig: (
     name: SCREENS.POST,
     component: NewPostScreen,
     icon: () => <Icon name="plus-square-o" size={26} />,
-    options: {},
+    options: {
+      headerShown: true,
+      tabBarStyle: {
+        display: 'none',
+      },
+    },
   },
   {
     name: SCREENS.REELS,

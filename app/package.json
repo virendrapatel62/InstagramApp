@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@faker-js/faker": "^9.7.0",
+    "@react-native-camera-roll/camera-roll": "^7.10.0",
     "@react-native-documents/picker": "^10.1.2",
     "@react-native-documents/viewer": "^1.0.1",
     "@react-navigation/bottom-tabs": "^7.3.10",
@@ -22,8 +23,10 @@
     "react": "19.0.0",
     "react-native": "0.79.1",
     "react-native-flex-layout": "^0.1.5",
+    "react-native-image-crop-picker": "^0.42.0",
     "react-native-multitap": "^0.0.5",
     "react-native-pager-view": "^6.7.1",
+    "react-native-permissions": "^5.4.0",
     "react-native-safe-area-context": "^5.4.0",
     "react-native-screens": "^4.10.0",
     "react-native-svg": "^15.11.2",
