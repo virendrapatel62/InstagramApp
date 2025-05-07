@@ -17,3 +17,7 @@ export function getRandomUser() {
 export function getRandomUsers(count = 10) {
   return new Array(count).fill(undefined).map(() => getRandomUser());
 }
+
+export function getRandomContent(words = 10) {
+  return faker.lorem.words(words);
+}
