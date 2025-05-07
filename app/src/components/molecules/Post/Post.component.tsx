@@ -1,17 +1,16 @@
 import React, { useRef, useState } from 'react';
+import { ViewStyle } from 'react-native';
+import { Stack } from 'react-native-flex-layout';
+import MultiTap from 'react-native-multitap';
 import {
   getRandomContent,
   getRandomImage,
   getRandomUser,
 } from '../../../lib/seed';
-import { Icon, Image, Text } from '../../atoms';
-import { Pressable, ViewStyle } from 'react-native';
-import Flex from '../../atoms/Flex/Flex.component';
-import { View } from 'react-native';
-import createStyle from './Post.styles';
 import { useTheme } from '../../../theme';
-import MultiTap from 'react-native-multitap';
-import { Spacer, Stack } from 'react-native-flex-layout';
+import { Icon, Image, Text } from '../../atoms';
+import Flex from '../../atoms/Flex/Flex.component';
+import createStyle from './Post.styles';
 
 interface IPostProps {
   thumbnail: string;
