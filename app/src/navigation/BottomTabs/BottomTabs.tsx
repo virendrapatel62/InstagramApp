@@ -54,7 +54,7 @@ export default function BottomTabs() {
 
   return (
     <BottomTabNavigator.Navigator
-      initialRouteName={SCREENS.POST}
+      initialRouteName={SCREENS.CREATE_POST}
       screenOptions={{
         tabBarStyle: {
           backgroundColor: theme.colors.background,
@@ -72,7 +72,12 @@ export default function BottomTabs() {
             component={tab.component}
             options={{
               ...commonOptions,
-              tabBarStyle: tab?.options?.tabBarStyle,
+              tabBarStyle: Object.assign(
+                {
+                  backgroundColor: theme.colors.background,
+                },
+                tab?.options?.tabBarStyle,
+              ),
               tabBarIcon: tab.icon,
               headerShown: !!tab.options?.headerShown,
               animation: 'shift',

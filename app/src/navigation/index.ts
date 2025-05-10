@@ -6,7 +6,10 @@ export const SCREENS = {
   SPLASH: 'Splash',
   HOME: 'Home',
   HOME_TABS: 'HomeTabs',
-  POST: 'Post',
+
+  CREATE_POST: 'Create Post',
+  CREATE_POST_CAPTION: 'Create Post Caption',
+
   REELS: 'Reels',
   PROFILE: 'Profile',
   MESSAGES: 'Messages',
@@ -47,4 +50,11 @@ export function navigateToSearchScreen(
     screen: SCREENS.SEARCH,
     params: options,
   });
+}
+
+export function navigateToNewPostCaptionScreen(
+  navigation: ReturnType<typeof useNavigation<any>>,
+) {
+  console.log('Navigaton to caption screen');
+  navigation.navigate(SCREENS.CREATE_POST_CAPTION);
 }

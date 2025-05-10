@@ -1,0 +1,65 @@
+// components/atoms/Button.tsx
+import React from 'react';
+import {
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+  ViewStyle,
+  TextStyle,
+} from 'react-native';
+import { useTheme } from '../../../theme';
+
+interface ButtonProps {
+  title: string;
+  onPress?: () => void;
+  backgroundColor?: string;
+  textColor?: string;
+  style?: ViewStyle; // For custom button container styles
+  textStyle?: TextStyle; // For custom text styles
+}
+
+const Button: React.FC<ButtonProps> = ({
+  title,
+  onPress,
+  backgroundColor,
+  textColor,
+  style,
+  textStyle,
+}) => {
+  const { theme } = useTheme(); // Use the theme context for dynamic styling
+
+  return (
+    <TouchableOpacity
+      onPress={onPress}
+      style={[
+        styles.button,
+        { backgroundColor: backgroundColor || theme.colors.primary }, // Use theme primary color as default
+        style,
+      ]}>
+      <Text
+        style={[
+          styles.buttonText,
+          { color: textColor || theme.colors.white }, // Default text color is white
+          textStyle,
+        ]}>
+        {title}
+      </Text>
+    </TouchableOpacity>
+  );
+};
+
+const styles = StyleSheet.create({
+  button: {
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonText: {
+    fontSize: 16,
+    fontWeight: '600',
+  },
+});
+
+export default Button;

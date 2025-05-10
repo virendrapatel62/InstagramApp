@@ -13,6 +13,7 @@ import SearchScreen from '../../screens/Search/Search.screen';
 
 export interface IScreenConfig {
   name: string;
+  title: string;
   component: (props: any) => ReactNode;
   icon?: () => ReactNode;
   options?: {
@@ -28,12 +29,14 @@ export const getBottomTabsConfig: (
 ) => IScreenConfig[] = navigation => [
   {
     name: SCREENS.HOME,
+    title: SCREENS.HOME,
     component: HomeScreen,
     icon: () => <Icon name="home" lib="Entypo" size={24} />,
     options: {},
   },
   {
     name: SCREENS.SEARCH,
+    title: SCREENS.SEARCH,
     component: SearchScreen,
     icon: () => <Icon name="search1" lib="AntDesign" size={24} />,
     options: {},
@@ -44,7 +47,8 @@ export const getBottomTabsConfig: (
     },
   },
   {
-    name: SCREENS.POST,
+    name: SCREENS.CREATE_POST,
+    title: SCREENS.CREATE_POST,
     component: NewPostScreen,
     icon: () => <Icon name="plus-square-o" size={26} />,
     options: {
@@ -56,12 +60,14 @@ export const getBottomTabsConfig: (
   },
   {
     name: SCREENS.REELS,
+    title: SCREENS.REELS,
     component: ExploreReels,
     icon: () => <ReelIcon size={22} />,
     options: {},
   },
   {
     name: SCREENS.PROFILE,
+    title: SCREENS.PROFILE,
     component: Profile,
     icon: () => (
       <Image

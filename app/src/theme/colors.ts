@@ -1,9 +1,9 @@
 // theme/colors.ts
 
 const commonColors = {
-  gradientStart: '#feda75',
-  gradientMiddle: '#d62976',
-  gradientEnd: '#4f5bd5',
+  gradientStart: '#feda75', // Yellow
+  gradientMiddle: '#d62976', // Magenta-pink
+  gradientEnd: '#4f5bd5', // Indigo-blue
 };
 
 export const lightTheme = {
@@ -19,14 +19,14 @@ export const lightTheme = {
   textSecondary: '#8e8e8e',
 
   // Buttons & Accents
-  primary: '#d62976',
-  secondary: '#405DE6',
+  primary: '#E1306C', // Instagram Pink (Magenta)
+  secondary: '#F56040', // Instagram Orange-Red
   error: '#FF3B30',
   success: '#4CD964',
 
   // UI Elements
   border: '#dbdbdb',
-  storyBorder: '#c13584',
+  storyBorder: '#C13584',
 
   // Icons
   icon: '#262626',
@@ -40,10 +40,16 @@ export const lightTheme = {
   darkGray: '#333333',
 
   imagePlaceHolder: '#f0f2f5',
+
+  // Switch
+  switchTrackOn: '#E1306C',
+  switchTrackOff: '#cccccc',
+  switchThumbOn: '#ffffff',
+  switchThumbOff: '#262626',
 };
 
 export const darkTheme = {
-  // Gradients (keep vibrant for contrast)
+  // Gradients
   ...commonColors,
 
   // Background & Surfaces
@@ -55,14 +61,14 @@ export const darkTheme = {
   textSecondary: '#a8a8a8',
 
   // Buttons & Accents
-  primary: '#d62976',
-  secondary: '#405DE6',
+  primary: '#E1306C',
+  secondary: '#F56040',
   error: '#FF453A',
   success: '#30D158',
 
   // UI Elements
   border: '#333333',
-  storyBorder: '#c13584',
+  storyBorder: '#C13584',
 
   // Icons
   icon: '#ffffff',
@@ -76,4 +82,9 @@ export const darkTheme = {
   darkGray: '#1c1c1e',
 
   imagePlaceHolder: '#2c2c2e',
+
+  switchTrackOn: '#FF7E99', // Light pinkish-red, visible on black
+  switchTrackOff: '#666666', // Medium gray for subtle off state
+  switchThumbOn: '#FFD1DC', // Light pink thumb
+  switchThumbOff: '#AAAAAA', // Light gray thumb
 };

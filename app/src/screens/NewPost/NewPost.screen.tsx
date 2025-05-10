@@ -1,6 +1,12 @@
 import { useNavigation } from '@react-navigation/native';
 import { Fragment, useEffect, useLayoutEffect, useMemo, useState } from 'react';
-import { Dimensions, FlatList, Pressable, ScrollView } from 'react-native';
+import {
+  Dimensions,
+  FlatList,
+  Pressable,
+  ScrollView,
+  ToastAndroid,
+} from 'react-native';
 import { Box, Spacer } from 'react-native-flex-layout';
 import { Icon, Image, Text } from '../../components/atoms';
 import Flex from '../../components/atoms/Flex/Flex.component';
@@ -9,6 +15,11 @@ import {
   getAllGallaryImages,
   IGallaryImages,
 } from '../../services/galleryService';
+import { useNewPostStore } from './useNewPostStore';
+import { navigateToNewPostCaptionScreen } from '../../navigation';
+import { useTheme } from '../../theme';
+
+const MAX_ALLOWED_IMAGES = 10;
 
 const HeaderRight = (props: any) => (
   <Box mr={16}>
@@ -34,38 +45,26 @@ const HeaderLeft = (props: any) => {
 
 export default function NewPostScreen() {
   const navigation = useNavigation();
-  const [selectedImages, setSelectedImages] = useState<any[]>([]);
+  const store = useNewPostStore();
+  const { theme } = useTheme();
+  const selectedImages = store.post.selectedImages;
+  const isSelected = store.isSelected;
+
   const [allImages, setAllImages] = useState<IGallaryImages[]>([]);
-
-  // Memoizing the selected images map for performance optimization
-  const selectedImagesMap: Record<string, boolean> = useMemo(() => {
-    return selectedImages.reduce((acc, image) => {
-      acc[image.id] = true;
-      return acc;
-    }, {});
-  }, [selectedImages]);
-
-  const isSelected = (id: string) => {
-    return selectedImagesMap[id];
-  };
 
   // Function to toggle the selection of images
   const toggleSelection = (image: IGallaryImages) => {
-    setSelectedImages(prevSelectedImages => {
-      if (isSelected(image.id)) {
-        // If the image is already selected, remove it
-        return prevSelectedImages.filter(
-          selectedImage => selectedImage.id !== image.id,
-        );
-      } else {
-        // Otherwise, add the image to the selection
-        return [...prevSelectedImages, image];
-      }
-    });
+    if (isSelected(image.id)) {
+      // If the image is already selected, remove it
+      store.removeImage(image.id);
+    }
+
+    if (selectedImages.length <= MAX_ALLOWED_IMAGES) {
+      store.addImage(image);
+    }
   };
 
   const getAllImages = () => {
-    setSelectedImages([]);
     setAllImages([]);
     getAllGallaryImages().then(images => {
       setAllImages(images);
@@ -75,13 +74,17 @@ export default function NewPostScreen() {
   const handleOnNext = () => {
     if (!selectedImages.length) return;
 
-    console.log({ selectedImages });
+    navigateToNewPostCaptionScreen(navigation);
   };
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => <HeaderRight onNext={handleOnNext} />,
       headerLeft: () => <HeaderLeft onPress={() => navigation.goBack()} />,
+      headerStyle: {
+        backgroundColor: theme.colors.background, // Change this color as per your theme
+      },
+      headerTintColor: theme.colors.textPrimary, // Optional: sets text/icon color
       title: 'New Post',
     });
   }, [navigation, handleOnNext]);
@@ -147,7 +150,7 @@ export default function NewPostScreen() {
                     position: 'relative',
                   }}
                   w={Dimensions.get('window').width / 3}>
-                  {isSelected(image.id) && (
+                  {store.isSelected(image.id) && (
                     <Fragment>
                       <Box position="absolute" zIndex={2} p={4}>
                         <Icon name="check" color="white" size={42} />

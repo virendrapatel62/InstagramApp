@@ -14,7 +14,7 @@ import { useTheme } from '../../../theme';
  */
 
 const Icon: IIcon = props => {
-  const { name, size = 24, color = '#000', style, lib } = props;
+  const { name, size = 24, color, style, lib } = props;
   const { theme } = useTheme();
   const IconComponents = [
     FontAwesomeIcon,
