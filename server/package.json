@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "./scripts/dev.sh",
+    "dev:post-serve": "NX_DAEMON=false nx run post-serve:dev",
     "build:config": "nx build config",
     "reset": "npx nx reset"
   },

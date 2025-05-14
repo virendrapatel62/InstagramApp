@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Pressable } from "react-native";
 import {
   Grayscale,
@@ -8,21 +8,18 @@ import {
   Warm,
 } from "react-native-color-matrix-image-filters";
 import { Box, Spacer } from "react-native-flex-layout";
+import ViewShot from "react-native-view-shot";
 import { Image } from "../../components/atoms";
 import Button from "../../components/atoms/Button/Button.component";
 import Flex from "../../components/atoms/Flex/Flex.component";
 import ListView from "../../components/layouts/ListView/ListView.component";
 import ScreenWrapper from "../../components/layouts/ScreenWrapper/ScreenWrapper.layout";
 import { getScreenWidth } from "../../lib/screenUtils";
-import { useTheme } from "../../theme";
-import { useNewPostStore } from "./useNewPostStore";
-import { useRef } from "react";
-import { View } from "react-native";
-import ViewShot from "react-native-view-shot";
 import {
   navigateToNewPostCaptionScreen,
   useNavigation,
 } from "../../navigation";
+import { useNewPostStore } from "./useNewPostStore";
 
 // Add all filters here
 const allFilters = [Grayscale, Sepia, Invert, Nightvision, Warm];
@@ -41,35 +38,23 @@ export default function NewPostFiltersScreen() {
   const handleNext = async () => {
     const results = [];
 
-    console.log("Start next");
-
     try {
-      console.log("try");
-
       if (viewRefs.current?.[0]) {
         for (let i = 0; i < selectedImages.length; i++) {
           const updated = {
             ...selectedImages[i],
           };
           updated.uri = await viewRefs.current[i].capture();
-          console.log("Added images");
           results.push(updated);
         }
         store.setSelectedImages(results);
-        console.log("after store");
       }
     } catch (error) {
-      console.log("catch");
       console.log(error);
     }
-    console.log("before store");
 
     navigateToNewPostCaptionScreen(navigation);
-
-    console.log("after navigation");
   };
-
-  console.log(selectedImages);
 
   const handleImagePress = (index: number) => {
     setAppliedFilters((prev) => {

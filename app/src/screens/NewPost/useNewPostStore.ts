@@ -47,7 +47,6 @@ const storeCreator: StateCreator<PostState, [["zustand/immer", never]], []> = (
   selectedImagesMap: {},
 
   setSelectedImages: (images) => {
-    console.log({ images });
     set((state) => {
       state.post.selectedImages = images;
       state.selectedImagesMap = images.reduce((acc, image) => {
@@ -91,7 +90,6 @@ const storeCreator: StateCreator<PostState, [["zustand/immer", never]], []> = (
   },
 
   reset: () => {
-    console.log("🔁 Reset function called");
     set((state) => {
       state.post = {
         allowComments: true,
@@ -148,23 +146,16 @@ const storeCreator: StateCreator<PostState, [["zustand/immer", never]], []> = (
         "http://192.168.29.193:5002/api/post-serve/posts",
         postPayload
       );
-      console.log("✅ Post created:", postResponse.data);
-  
+
       onSuccess?.();
     } catch (error) {
       console.error("Image upload failed:", error);
-
-     
-    }finally{
-      set(state=>{
-        
-        state.loading = false})
+    } finally {
+      set((state) => {
+        state.loading = false;
+      });
     }
   },
 });
 
 export const useNewPostStore = create<PostState>()(immer(storeCreator));
-
-useNewPostStore.subscribe((state) => {
-  console.log("🧠 Zustand Store Updated:", state);
-});

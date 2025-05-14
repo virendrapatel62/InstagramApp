@@ -15,15 +15,16 @@ import { Spacer, Stack } from "react-native-flex-layout";
 
 interface IPostProps {
   thumbnail: string;
+  caption: string;
+  allowComments: boolean;
+  allowLikes: boolean;
   style?: ViewStyle;
 }
 
 export default function Post(props: IPostProps) {
-  const { theme , isDark } = useTheme();
+  const { theme, isDark } = useTheme();
   const styles = createStyle(theme);
-  const caption = useRef(
-    getRandomContent(Math.floor(Math.random() * 20))
-  ).current;
+  const caption = props.caption;
   const profilePic = useRef(getRandomImage(100)).current;
   const username = useRef(getRandomUser().username).current;
 
@@ -72,7 +73,10 @@ export default function Post(props: IPostProps) {
 
         <Icon size={20} name="ellipsis-v"></Icon>
       </Flex>
-      <MultiTap onDoubleTap={likeByDoubleClick} style={styles.imageContainer}>
+      <MultiTap
+        onDoubleTap={props.allowLikes ? likeByDoubleClick : undefined}
+        style={styles.imageContainer}
+      >
         <Image
           style={styles.image}
           width={"100%"}
@@ -84,12 +88,12 @@ export default function Post(props: IPostProps) {
             style={styles.heartOverlay}
             size={64}
             name="heart"
-            color={isDark ?'white' : 'black'}
+            color={isDark ? "white" : "black"}
           ></Icon>
         )}
       </MultiTap>
       <Stack
-        spacing={6}
+        spacing={10}
         style={{
           margin: 8,
           marginHorizontal: 16,
@@ -101,12 +105,14 @@ export default function Post(props: IPostProps) {
             gap: 16,
           }}
         >
-          <Icon
-            color={liked ? "red" : "white"}
-            onPress={toggleLike}
-            name={liked ? "heart" : "heart-o"}
-          ></Icon>
-          <Icon name="comment-o"></Icon>
+          {props.allowLikes && (
+            <Icon
+              color={liked ? "red" : "white"}
+              onPress={toggleLike}
+              name={liked ? "heart" : "heart-o"}
+            ></Icon>
+          )}
+          {props.allowComments && <Icon name="comment-o"></Icon>}
           <Icon name="send"></Icon>
         </Flex>
 

@@ -1,16 +1,15 @@
-
 import express, { Router } from 'express';
 import { postServeConfig } from './config';
 import cors from 'cors';
 import uploadRouter from './routers/upload.router';
 import postRouter from './routers/post.router';
 
-import {connectDB} from './db'
-connectDB()
+import { connectDB } from './db';
+connectDB();
 
 const postApp = express();
 postApp.use(cors());
-postApp.use(express.json())
+postApp.use(express.json());
 
 const appName = postServeConfig.appName;
 const port = postServeConfig.port;

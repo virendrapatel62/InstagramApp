@@ -8,7 +8,7 @@ const postSchema = new Schema<IPost>(
       type: String,
       default: '',
     },
-    allowLinks: {
+    allowLikes: {
       type: Boolean,
       default: true,
     },

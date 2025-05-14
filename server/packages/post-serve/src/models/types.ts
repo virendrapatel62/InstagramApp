@@ -12,7 +12,7 @@ export interface IMedia extends Document {
 }
 export interface IPost extends Document {
   caption: string;
-  allowLinks: boolean;
+  allowLikes: boolean;
   allowComments: boolean;
   media: mongoose.Types.ObjectId[] | IMedia[];
   user: mongoose.Types.ObjectId | null;
