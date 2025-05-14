@@ -9,6 +9,7 @@ export const SCREENS = {
 
   CREATE_POST: 'Create Post',
   CREATE_POST_CAPTION: 'Create Post Caption',
+  CREATE_POST_FILTERS: 'Create Post Filters',
 
   REELS: 'Reels',
   PROFILE: 'Profile',
@@ -55,6 +56,11 @@ export function navigateToSearchScreen(
 export function navigateToNewPostCaptionScreen(
   navigation: ReturnType<typeof useNavigation<any>>,
 ) {
-  console.log('Navigaton to caption screen');
+  console.log(SCREENS.CREATE_POST_CAPTION);
   navigation.navigate(SCREENS.CREATE_POST_CAPTION);
+}
+export function navigateToNewPostFiltersScreen(
+  navigation: ReturnType<typeof useNavigation<any>>,
+) {
+  navigation.navigate(SCREENS.CREATE_POST_FILTERS);
 }

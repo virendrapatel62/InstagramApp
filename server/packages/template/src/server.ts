@@ -1,10 +1,9 @@
 import express from 'express';
-import { streamConfig } from './config';
 
 const streamApp = express();
 
-const appName = streamConfig.appName;
-const port = streamConfig.port;
+const appName = 'template';
+const port = 5999;
 
 streamApp.listen(port, () => {
   console.log(`${appName} app is listening on port ${port}`);

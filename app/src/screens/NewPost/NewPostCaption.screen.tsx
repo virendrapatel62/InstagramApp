@@ -1,22 +1,28 @@
 import React from 'react';
+import { ActivityIndicator, Switch, View } from 'react-native';
 import { Box, Spacer } from 'react-native-flex-layout';
 import { Image, Text } from '../../components/atoms';
+import Button from '../../components/atoms/Button/Button.component';
+import Flex from '../../components/atoms/Flex/Flex.component';
+import TextField from '../../components/atoms/TextField/TextField.component';
 import ListView from '../../components/layouts/ListView/ListView.component';
 import ScreenWrapper from '../../components/layouts/ScreenWrapper/ScreenWrapper.layout';
-import { useNewPostStore } from './useNewPostStore';
-import { Pressable, Switch, TextInput, View } from 'react-native';
-import TextField from '../../components/atoms/TextField/TextField.component';
-import Flex from '../../components/atoms/Flex/Flex.component';
 import { useTheme } from '../../theme';
-import Button from '../../components/atoms/Button/Button.component';
+import { useNewPostStore } from './useNewPostStore';
+import { useNavigation } from '@react-navigation/native';
+import { navigateToHomeScreen } from '../../navigation';
+
 
 export default function NewPostCaptionScreen() {
   const store = useNewPostStore();
-  const selectedImages = store.post.selectedImages;
+  const { selectedImages } = store.post;
   const { theme } = useTheme();
+  const naviagtion = useNavigation()
 
-  const handleShare = () => {
-    console.log(store.post);
+  const handleShare = async () => {
+    store.createPost(()=>{
+      navigateToHomeScreen(naviagtion)
+    })
   };
 
   return (
@@ -81,7 +87,11 @@ export default function NewPostCaptionScreen() {
         </Box>
 
         <Box mh={16} mb={30}>
-          <Button onPress={handleShare} title="Share"></Button>
+          <Button
+            onPress={handleShare}
+            title="Share"
+            loading={store.loading}
+            loadingMessage="Posting.."></Button>
         </Box>
       </Box>
     </ScreenWrapper>

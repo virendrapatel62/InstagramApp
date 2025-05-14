@@ -1,23 +1,24 @@
 import { useNavigation } from '@react-navigation/native';
-import { Fragment, useEffect, useLayoutEffect, useMemo, useState } from 'react';
+import { Fragment, useEffect, useLayoutEffect, useState } from 'react';
 import {
   Dimensions,
   FlatList,
   Pressable,
-  ScrollView,
-  ToastAndroid,
+  ScrollView
 } from 'react-native';
 import { Box, Spacer } from 'react-native-flex-layout';
 import { Icon, Image, Text } from '../../components/atoms';
 import Flex from '../../components/atoms/Flex/Flex.component';
 import ScreenWrapper from '../../components/layouts/ScreenWrapper/ScreenWrapper.layout';
 import {
+  navigateToNewPostFiltersScreen
+} from '../../navigation';
+import {
   getAllGallaryImages,
   IGallaryImages,
 } from '../../services/galleryService';
-import { useNewPostStore } from './useNewPostStore';
-import { navigateToNewPostCaptionScreen } from '../../navigation';
 import { useTheme } from '../../theme';
+import { useNewPostStore } from './useNewPostStore';
 
 const MAX_ALLOWED_IMAGES = 10;
 
@@ -73,8 +74,7 @@ export default function NewPostScreen() {
 
   const handleOnNext = () => {
     if (!selectedImages.length) return;
-
-    navigateToNewPostCaptionScreen(navigation);
+    navigateToNewPostFiltersScreen(navigation);
   };
 
   useLayoutEffect(() => {

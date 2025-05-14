@@ -54,7 +54,6 @@ export default function BottomTabs() {
 
   return (
     <BottomTabNavigator.Navigator
-      initialRouteName={SCREENS.CREATE_POST}
       screenOptions={{
         tabBarStyle: {
           backgroundColor: theme.colors.background,

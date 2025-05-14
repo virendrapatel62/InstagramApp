@@ -6,6 +6,7 @@ import { IScreenConfig } from './BottomTab.config';
 import Notifications from '../../screens/Notifications/Notifications.screen';
 import Messages from '../../screens/Messages/Messages.screen';
 import NewPostCaptionScreen from '../../screens/NewPost/NewPostCaption.screen';
+import NewPostFiltersScreen from '../../screens/NewPost/NewPostFilters.screen';
 
 export const rootStackConfig: IScreenConfig[] = [
   {
@@ -34,8 +35,14 @@ export const rootStackConfig: IScreenConfig[] = [
   },
   {
     name: SCREENS.CREATE_POST_CAPTION,
-    title:"Caption",
+    title: 'Caption',
     component: NewPostCaptionScreen,
+    options: { headerShown: true },
+  },
+  {
+    name: SCREENS.CREATE_POST_FILTERS,
+    title: 'Apply Filters',
+    component: NewPostFiltersScreen,
     options: { headerShown: true },
   },
 ];

@@ -1,17 +1,17 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState } from "react";
 import {
   getRandomContent,
   getRandomImage,
   getRandomUser,
-} from '../../../lib/seed';
-import { Icon, Image, Text } from '../../atoms';
-import { Pressable, ViewStyle } from 'react-native';
-import Flex from '../../atoms/Flex/Flex.component';
-import { View } from 'react-native';
-import createStyle from './Post.styles';
-import { useTheme } from '../../../theme';
-import MultiTap from 'react-native-multitap';
-import { Spacer, Stack } from 'react-native-flex-layout';
+} from "../../../lib/seed";
+import { Icon, Image, Text } from "../../atoms";
+import { Pressable, ViewStyle } from "react-native";
+import Flex from "../../atoms/Flex/Flex.component";
+import { View } from "react-native";
+import createStyle from "./Post.styles";
+import { useTheme } from "../../../theme";
+import MultiTap from "react-native-multitap";
+import { Spacer, Stack } from "react-native-flex-layout";
 
 interface IPostProps {
   thumbnail: string;
@@ -19,10 +19,10 @@ interface IPostProps {
 }
 
 export default function Post(props: IPostProps) {
-  const { theme } = useTheme();
+  const { theme , isDark } = useTheme();
   const styles = createStyle(theme);
   const caption = useRef(
-    getRandomContent(Math.floor(Math.random() * 20)),
+    getRandomContent(Math.floor(Math.random() * 20))
   ).current;
   const profilePic = useRef(getRandomImage(100)).current;
   const username = useRef(getRandomUser().username).current;
@@ -33,7 +33,7 @@ export default function Post(props: IPostProps) {
   const likes = 123456 + (liked ? 1 : 0);
 
   function formatLikes() {
-    const formatter = new Intl.NumberFormat('en-IN');
+    const formatter = new Intl.NumberFormat("en-IN");
     return formatter.format(likes);
   }
 
@@ -57,7 +57,8 @@ export default function Post(props: IPostProps) {
           gap: 12,
         }}
         items="center"
-        direction="row">
+        direction="row"
+      >
         <Image height={50} aspectRatio={1} rounded src={profilePic}></Image>
 
         <Flex fill>
@@ -74,15 +75,17 @@ export default function Post(props: IPostProps) {
       <MultiTap onDoubleTap={likeByDoubleClick} style={styles.imageContainer}>
         <Image
           style={styles.image}
-          width={'100%'}
+          width={"100%"}
           aspectRatio={0.9}
-          src={props.thumbnail}></Image>
+          src={props.thumbnail}
+        ></Image>
         {showHeartOverlay && (
           <Icon
             style={styles.heartOverlay}
             size={64}
             name="heart"
-            color="white"></Icon>
+            color={isDark ?'white' : 'black'}
+          ></Icon>
         )}
       </MultiTap>
       <Stack
@@ -90,21 +93,24 @@ export default function Post(props: IPostProps) {
         style={{
           margin: 8,
           marginHorizontal: 16,
-        }}>
+        }}
+      >
         <Flex
           direction="row"
           style={{
             gap: 16,
-          }}>
+          }}
+        >
           <Icon
-            color={liked ? 'red' : 'black'}
+            color={liked ? "red" : "white"}
             onPress={toggleLike}
-            name={liked ? 'heart' : 'heart-o'}></Icon>
+            name={liked ? "heart" : "heart-o"}
+          ></Icon>
           <Icon name="comment-o"></Icon>
           <Icon name="send"></Icon>
         </Flex>
 
-        <Text weight={'black'}>{formatLikes()} likes</Text>
+        <Text weight={"black"}>{formatLikes()} likes</Text>
         <Text weight="normal">{caption}</Text>
       </Stack>
     </Stack>

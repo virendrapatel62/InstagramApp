@@ -13,6 +13,7 @@ export default function RootStack() {
       {rootStackConfig.map(screen => (
         <Stack.Screen
           name={screen.name}
+          key={screen.name}
           component={screen.component}
           options={{
             headerShown: screen?.options?.headerShown,
