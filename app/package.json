@@ -25,7 +25,7 @@
     "form-data": "^4.0.2",
     "immer": "^10.1.1",
     "react": "19.0.0",
-    "react-native": "0.79.1",
+    "react-native": "^0.79.2",
     "react-native-color-matrix-image-filters": "^7.0.2",
     "react-native-flex-layout": "^0.1.5",
     "react-native-image-crop-picker": "^0.42.0",
