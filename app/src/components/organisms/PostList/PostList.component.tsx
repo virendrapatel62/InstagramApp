@@ -8,7 +8,7 @@ import Post from "../../molecules/Post/Post.component";
 import createStyles from "./PostList.styles";
 
 // Define the structure of a Post item
-type PostItem = {
+export type PostItem = {
   _id: string;
   caption: string;
   allowLikes: boolean;

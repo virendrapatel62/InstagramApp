@@ -39,6 +39,7 @@ export const createPostHandler = async (req: Request, res: Response) => {
 };
 
 export const getAllPostsHandler = async (req: Request, res: Response) => {
+  console.log(getAllPostsHandler.name);
   try {
     const page = parseInt(req.query.page as string, 10) || 1;
     const limit = DEFAULT_PAGE_SIZE;

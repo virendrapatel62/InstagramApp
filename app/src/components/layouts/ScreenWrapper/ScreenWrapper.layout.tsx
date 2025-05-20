@@ -1,10 +1,14 @@
-import React, { Fragment, PropsWithChildren } from 'react';
-import { StyleSheet, View, ViewStyle } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { useTheme } from '../../../theme';
+import React, { Fragment, PropsWithChildren } from "react";
+import { StyleSheet, View, ViewStyle } from "react-native";
+import {
+  SafeAreaProviderProps,
+  SafeAreaView,
+} from "react-native-safe-area-context";
+import { useTheme } from "../../../theme";
 
 interface IScreenWrapperProps extends PropsWithChildren {
   safeArea?: boolean;
+  isModal?: boolean;
   style?: ViewStyle;
 }
 
@@ -25,7 +29,7 @@ const ScreenWrapper = (props: IScreenWrapperProps) => {
   }
 
   return (
-    <SafeAreaView style={containerStyles} edges={['top', 'left', 'right']}>
+    <SafeAreaView style={containerStyles} edges={["top", "left", "right"]}>
       <View style={[styles.fullHeight]}>{children}</View>
     </SafeAreaView>
   );

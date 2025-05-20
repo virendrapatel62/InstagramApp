@@ -1,24 +1,17 @@
-import { useNavigation } from '@react-navigation/native';
-import { Fragment, useEffect, useLayoutEffect, useState } from 'react';
-import {
-  Dimensions,
-  FlatList,
-  Pressable,
-  ScrollView
-} from 'react-native';
-import { Box, Spacer } from 'react-native-flex-layout';
-import { Icon, Image, Text } from '../../components/atoms';
-import Flex from '../../components/atoms/Flex/Flex.component';
-import ScreenWrapper from '../../components/layouts/ScreenWrapper/ScreenWrapper.layout';
-import {
-  navigateToNewPostFiltersScreen
-} from '../../navigation';
+import { useNavigation } from "@react-navigation/native";
+import { Fragment, useEffect, useLayoutEffect, useState } from "react";
+import { Dimensions, FlatList, Pressable, ScrollView } from "react-native";
+import { Box, Spacer } from "react-native-flex-layout";
+import { Icon, Image, Text } from "../../components/atoms";
+import Flex from "../../components/atoms/Flex/Flex.component";
+import ScreenWrapper from "../../components/layouts/ScreenWrapper/ScreenWrapper.layout";
+import { navigateToNewPostFiltersScreen } from "../../navigation";
 import {
   getAllGallaryImages,
   IGallaryImages,
-} from '../../services/galleryService';
-import { useTheme } from '../../theme';
-import { useNewPostStore } from './useNewPostStore';
+} from "../../services/galleryService";
+import { useTheme } from "../../theme";
+import { useNewPostStore } from "./useNewPostStore";
 
 const MAX_ALLOWED_IMAGES = 10;
 
@@ -39,7 +32,8 @@ const HeaderLeft = (props: any) => {
         onPress={props.onPress}
         size={24}
         name="close"
-        lib="AntDesign"></Icon>
+        lib="AntDesign"
+      ></Icon>
     </Box>
   );
 };
@@ -53,30 +47,6 @@ export default function NewPostScreen() {
 
   const [allImages, setAllImages] = useState<IGallaryImages[]>([]);
 
-  // Function to toggle the selection of images
-  const toggleSelection = (image: IGallaryImages) => {
-    if (isSelected(image.id)) {
-      // If the image is already selected, remove it
-      store.removeImage(image.id);
-    }
-
-    if (selectedImages.length <= MAX_ALLOWED_IMAGES) {
-      store.addImage(image);
-    }
-  };
-
-  const getAllImages = () => {
-    setAllImages([]);
-    getAllGallaryImages().then(images => {
-      setAllImages(images);
-    });
-  };
-
-  const handleOnNext = () => {
-    if (!selectedImages.length) return;
-    navigateToNewPostFiltersScreen(navigation);
-  };
-
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => <HeaderRight onNext={handleOnNext} />,
@@ -85,24 +55,48 @@ export default function NewPostScreen() {
         backgroundColor: theme.colors.background, // Change this color as per your theme
       },
       headerTintColor: theme.colors.textPrimary, // Optional: sets text/icon color
-      title: 'New Post',
+      title: "New Post",
     });
   }, [navigation, handleOnNext]);
 
   useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
+    const unsubscribe = navigation.addListener("focus", () => {
       getAllImages();
     });
 
     return unsubscribe;
   }, [navigation]);
 
+  // Function to toggle the selection of images
+  function toggleSelection(image: IGallaryImages) {
+    if (isSelected(image.id)) {
+      // If the image is already selected, remove it
+      store.removeImage(image.id);
+    }
+
+    if (selectedImages.length <= MAX_ALLOWED_IMAGES) {
+      store.addImage(image);
+    }
+  }
+
+  function getAllImages() {
+    setAllImages([]);
+    getAllGallaryImages().then((images) => {
+      setAllImages(images);
+    });
+  }
+
+  function handleOnNext() {
+    if (!selectedImages.length) return;
+    navigateToNewPostFiltersScreen(navigation);
+  }
+
   return (
     <ScreenWrapper safeArea={false}>
       <Flex fill direction="column">
         {/* Selected Images List */}
         {!!selectedImages?.length && (
-          <Box h={Dimensions.get('window').height * 0.3}>
+          <Box h={Dimensions.get("window").height * 0.3}>
             <FlatList
               style={{
                 flex: 1,
@@ -117,7 +111,7 @@ export default function NewPostScreen() {
                   source={{ uri: item.uri }}
                   rounded={16}
                   aspectRatio={1}
-                  height={'100%'}
+                  height={"100%"}
                 />
               )}
               contentContainerStyle={{
@@ -132,24 +126,28 @@ export default function NewPostScreen() {
         <Box
           style={{
             flex: 1,
-          }}>
+          }}
+        >
           <ScrollView
             contentContainerStyle={{
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-            }}>
-            {allImages.map(image => (
+              flexDirection: "row",
+              flexWrap: "wrap",
+            }}
+          >
+            {allImages.map((image) => (
               <Pressable
                 onPress={() => toggleSelection(image)} // Toggle selection on click
-                key={image.id}>
+                key={image.id}
+              >
                 <Flex
                   p={2}
                   justify="center"
                   items="center"
                   style={{
-                    position: 'relative',
+                    position: "relative",
                   }}
-                  w={Dimensions.get('window').width / 3}>
+                  w={Dimensions.get("window").width / 3}
+                >
                   {store.isSelected(image.id) && (
                     <Fragment>
                       <Box position="absolute" zIndex={2} p={4}>
@@ -157,20 +155,22 @@ export default function NewPostScreen() {
                       </Box>
                       <Box
                         position="absolute"
-                        w={'100%'}
-                        h={'100%'}
+                        w={"100%"}
+                        h={"100%"}
                         zIndex={1}
                         style={{
-                          backgroundColor: 'rgba(0, 0, 0, 0.4)', // Black overlay
-                        }}></Box>
+                          backgroundColor: "rgba(0, 0, 0, 0.4)", // Black overlay
+                        }}
+                      ></Box>
                     </Fragment>
                   )}
                   <Image
                     source={{
                       uri: image.uri,
                     }}
-                    width={'100%'}
-                    aspectRatio={1}></Image>
+                    width={"100%"}
+                    aspectRatio={1}
+                  ></Image>
                 </Flex>
               </Pressable>
             ))}
