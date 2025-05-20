@@ -6,8 +6,19 @@ import StoryList from "../../components/organisms/StoryList/StoryList.component"
 import { usePostStore } from "./usePostStore";
 import SecureStorage, { ACCESSIBLE } from "rn-secure-storage"; // ✅ use this
 
+import ScreenGuardModule from "react-native-screenguard";
+
 export default function HomeScreen() {
   const { fetchPosts, hasMore, loading, page, posts } = usePostStore();
+
+  useEffect(() => {
+    (async () => {
+      await ScreenGuardModule.register({
+        backgroundColor: "#0F9D58",
+        timeAfterResume: 2000,
+      });
+    })();
+  }, []);
 
   useEffect(() => {
     (async () => {
